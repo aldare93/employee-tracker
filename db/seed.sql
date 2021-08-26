@@ -1,35 +1,63 @@
-use employee_db; 
+DROP DATABASE IF EXISTS employee_db;
+CREATE DATABASE employee_db;
+USE employee_db;
 
-INSERT INTO department
-    (name)
-VALUES
-    ('Accounting'),
-    ('Operations'),
-    ('Executive'),
-    ('Sales');
+-- departments data
+CREATE TABLE departments (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30)
+);
 
-INSERT INTO role
-    (name, salary, department_id)
-VALUES
-    ('CEO', 750000, 1),
-    ('CFO', 500000, 1),
-    ('IT', 50000, 1),
-    ('Web Developer', 1000000, 2),
-    ('Human Resources', 1000000, 2),
-    ('Customer Service', 60000, 2),
-    ('Project Manager', 250000, 3),
-    ('Operations Specialist', 250000, 3),
-    ('Accountant', 50000, 3);
+-- roles data
+CREATE TABLE roles (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(30),
+salary DECIMAL(10, 2),
+department_id INT
+);
 
-INSERT INTO employee 
-    (first_name, last_name, role_id, manager_id)
-VALUES  
-    ('Tom', 'Johnson', 1, NULL),
-    ('Steve', 'Roberts', 2, 1),
-    ('George', 'Nicholson', 3, 1),
-    ('Joseph', 'Miller', 4, NULL),
-    ('Amanda', 'Rodriguez', 5, 4),
-    ('Jamie', 'Smith', 6, 4),
-    ('Edward', 'Stark', 7, NULL),
-    ('Max', 'Casey', 8, 7),
-    ('Jon', 'Adams', 9, 7);
+INSERT INTO roles (
+title, salary, department_id)
+VALUES ("Web Developer, Full Stack",
+150000.00, 1);
+
+INSERT INTO roles (
+title, salary, department_id)
+VALUES ("Product Marketing Manager",
+120000.00, 2);
+
+INSERT INTO roles (
+title, salary, department_id)
+VALUES ("Sales Director",
+120000.00, 3);
+
+INSERT INTO roles (
+title, salary, department_id)
+VALUES ("Senior Operations Specialist",
+70000.00, 4);
+
+INSERT INTO departments (name) VALUES ("Engineering");
+INSERT INTO departments (name) VALUES ("Marketing");
+INSERT INTO departments (name) VALUES ("Sales");
+INSERT INTO departments (name) VALUES ("Operations");
+
+-- employees data
+CREATE TABLE employees (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+roles_id INT,
+manager_id INT
+);
+
+INSERT INTO employees (
+first_name, last_name, roles_id, manager_id)
+VALUES ("Alex", "DaRe", 1, 1);
+
+INSERT INTO employees (
+first_name, last_name, roles_id, manager_id)
+VALUES ("Jane", "Nicholson", 2, 2);
+
+INSERT INTO employees (
+first_name, last_name, roles_id, manager_id)
+VALUES ("Andrew", "DaRe", 3, 3);
